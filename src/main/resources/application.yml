@@ -9,3 +9,6 @@ spring:
 
   profiles:
     active: dev
+
+var1: "contenido de var1"
+var2: 100
