@@ -2,7 +2,7 @@ package com.bosonit.education.rs1.infrastructure.controller;
 
 import com.bosonit.education.rs1.application.exception.PersonNotFoundException;
 import com.bosonit.education.rs1.domain.entity.Person;
-import com.bosonit.education.rs1.domain.service.CrudService;
+import com.bosonit.education.rs1.application.service.CrudService;
 import com.bosonit.education.rs1.infrastructure.controller.dto.input.AddPersonInputDto;
 import com.bosonit.education.rs1.infrastructure.controller.dto.input.UpdatePersonInputDto;
 import com.bosonit.education.rs1.infrastructure.controller.dto.output.AddPersonOutputDto;

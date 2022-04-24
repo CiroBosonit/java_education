@@ -1,4 +1,4 @@
-package com.bosonit.education.rs1.domain.service;
+package com.bosonit.education.rs1.application.service;
 
 import com.bosonit.education.rs1.application.exception.PersonNotFoundException;
 import com.bosonit.education.rs1.domain.entity.Person;

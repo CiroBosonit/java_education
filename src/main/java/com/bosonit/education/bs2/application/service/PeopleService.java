@@ -1,4 +1,4 @@
-package com.bosonit.education.bs2.domain.service;
+package com.bosonit.education.bs2.application.service;
 
 import com.bosonit.education.bs2.domain.entity.Person;
 import lombok.Getter;
