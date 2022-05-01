@@ -1,4 +1,4 @@
-package com.bosonit.education.ej2.application;
+package com.bosonit.education.ej2.application.service;
 
 import com.bosonit.education.ej2.domain.entity.Person;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.CreatePersonInputDto;

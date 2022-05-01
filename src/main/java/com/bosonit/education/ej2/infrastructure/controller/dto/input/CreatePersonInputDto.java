@@ -3,12 +3,16 @@ package com.bosonit.education.ej2.infrastructure.controller.dto.input;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 public class CreatePersonInputDto {
 
+  @NotNull(message = "The field user cannot be null")
+  @Max(value = 10, message = "The length of the field user cannot exceed 10 characters")
   private String user;
   private String password;
   private String name;
@@ -20,19 +24,5 @@ public class CreatePersonInputDto {
   private LocalDate createdDate;
   private String imageUrl;
   private LocalDate terminationDate;
-
-  /**
-   * Checks whether the input fulfills the required conditions.
-   */
-  public void validateFields() {
-
-    if (null == user) {
-      throw new IllegalStateException("The field user cannot be null");
-    }
-
-    if (user.length() > 10) {
-      throw new IllegalStateException("The length of the field user cannot exceed 10 characters");
-    }
-  }
 
 }
