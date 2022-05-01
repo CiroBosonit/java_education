@@ -1,6 +1,6 @@
 package com.bosonit.education.ej2.infrastructure.controller;
 
-import com.bosonit.education.ej2.application.PersonService;
+import com.bosonit.education.ej2.application.service.PersonService;
 import com.bosonit.education.ej2.domain.entity.Person;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.CreatePersonInputDto;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.UpdatePersonInputDto;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class PersonController {
   }
 
   @PostMapping
-  public PersonOutputDto create(@RequestBody CreatePersonInputDto inputDto) {
+  public PersonOutputDto create(@Valid @RequestBody CreatePersonInputDto inputDto) {
 
     Person p = service.create(inputDto);
 
