@@ -5,6 +5,7 @@ import com.bosonit.education.ej2.domain.entity.Person;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.CreatePersonInputDto;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.UpdatePersonInputDto;
 import com.bosonit.education.ej2.infrastructure.controller.dto.output.PersonOutputDto;
+import com.bosonit.education.ej2.infrastructure.mapper.PersonMapper;
 import com.bosonit.education.shared.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class PersonController {
 
     List<Person> people = service.findAll();
 
-    return people.stream().map(PersonOutputDto::new).toList();
+    return people.stream().map(PersonMapper.INSTANCE::toDto).toList();
   }
 
   @GetMapping(value = "search")
@@ -34,7 +35,7 @@ public class PersonController {
 
     Person p = service.findByUser(user);
 
-    return new PersonOutputDto(p);
+    return PersonMapper.INSTANCE.toDto(p);
   }
 
   @PostMapping
@@ -42,7 +43,7 @@ public class PersonController {
 
     Person p = service.create(inputDto);
 
-    return new PersonOutputDto(p);
+    return PersonMapper.INSTANCE.toDto(p);
   }
 
   @DeleteMapping(value = "{personId}")
@@ -58,7 +59,7 @@ public class PersonController {
 
     Person p = service.update(personId, inputDto);
 
-    return new PersonOutputDto(p);
+    return PersonMapper.INSTANCE.toDto(p);
   }
 
 }
