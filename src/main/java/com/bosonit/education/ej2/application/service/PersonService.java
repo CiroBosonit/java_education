@@ -6,6 +6,7 @@ import com.bosonit.education.ej2.infrastructure.controller.dto.input.UpdatePerso
 import com.bosonit.education.shared.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Manages the basic functionalities of a person CRUD
@@ -35,7 +36,7 @@ public interface PersonService {
   void delete(Integer personId);
 
   /**
-   * Modifies the data of a person.
+   * Modifies all the data of a person.
    *
    * @param personId The identifier of the person to be modified
    * @param inputDto UpdatePersonInputDto The available data to be modified for a person
@@ -52,5 +53,15 @@ public interface PersonService {
    * @throws NotFoundException When an entity of type person is not found in the database
    */
   Person findByUser(String user) throws NotFoundException;
+
+  /**
+   * Modifies some data of a person.
+   *
+   * @param personId The identifier of the person to be modified
+   * @param inputDto UpdatePersonInputDto The available data to be modified for a person
+   * @return Person The updated registry
+   * @throws NotFoundException When an entity of type person is not found in the database
+   */
+  Person patch(Integer personId, Map<Object, Object> inputDto) throws NotFoundException;
 
 }
