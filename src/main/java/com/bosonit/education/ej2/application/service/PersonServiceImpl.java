@@ -7,8 +7,11 @@ import com.bosonit.education.ej2.infrastructure.repository.jpa.PersonRepository;
 import com.bosonit.education.shared.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -62,6 +65,20 @@ public class PersonServiceImpl implements PersonService {
   public Person findByUser(String user) throws NotFoundException {
 
     return repo.findByUser(user).orElseThrow(() -> new NotFoundException("Person", "user", user));
+  }
+
+  @Override
+  public Person patch(Integer personId, Map<Object, Object> inputDto) throws NotFoundException {
+
+    Person p = repo.findById(personId).orElseThrow(() -> new NotFoundException("Person", personId));
+
+    inputDto.forEach((k, v) -> {
+      Field field = ReflectionUtils.findField(Person.class, (String) k);
+      field.setAccessible(true);
+      ReflectionUtils.setField(field, p, v);
+    });
+
+    return repo.save(p);
   }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -58,6 +59,16 @@ public class PersonController {
   public PersonOutputDto update(@PathVariable Integer personId, @RequestBody UpdatePersonInputDto inputDto) throws NotFoundException {
 
     Person p = service.update(personId, inputDto);
+
+    return PersonMapper.INSTANCE.toDto(p);
+  }
+
+  @PatchMapping(value = "{personId}")
+  public PersonOutputDto patch(@PathVariable Integer personId, @RequestBody Map<Object, Object> inputDto) throws NotFoundException {
+
+    UpdatePersonInputDto validatedInputDto = PatchInputChecker.check(UpdatePersonInputDto.class, inputDto);
+
+    Person p = service.patch(personId, inputDto);
 
     return PersonMapper.INSTANCE.toDto(p);
   }
