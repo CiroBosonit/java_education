@@ -1,5 +1,6 @@
 package com.bosonit.education.ej2.infrastructure.controller.dto.input;
 
+import com.bosonit.education.ej2.infrastructure.PatchField;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -7,7 +8,9 @@ import java.time.LocalDate;
 @Getter
 public class UpdatePersonInputDto {
 
+  @PatchField
   private String user;
+
   private String password;
   private String name;
   private String surname;

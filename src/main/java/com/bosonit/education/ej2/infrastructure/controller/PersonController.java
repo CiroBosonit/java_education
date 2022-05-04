@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -64,11 +65,11 @@ public class PersonController {
   }
 
   @PatchMapping(value = "{personId}")
-  public PersonOutputDto patch(@PathVariable Integer personId, @RequestBody Map<Object, Object> inputDto) throws NotFoundException {
+  public PersonOutputDto patch(@PathVariable Integer personId, @RequestBody Map<Object, Object> inputDto) throws NotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
     UpdatePersonInputDto validatedInputDto = PatchInputChecker.check(UpdatePersonInputDto.class, inputDto);
 
-    Person p = service.patch(personId, inputDto);
+    Person p = service.patch(personId, validatedInputDto);
 
     return PersonMapper.INSTANCE.toDto(p);
   }

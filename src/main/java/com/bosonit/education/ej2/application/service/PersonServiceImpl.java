@@ -1,17 +1,17 @@
 package com.bosonit.education.ej2.application.service;
 
 import com.bosonit.education.ej2.domain.entity.Person;
+import com.bosonit.education.ej2.infrastructure.PatchField;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.CreatePersonInputDto;
 import com.bosonit.education.ej2.infrastructure.controller.dto.input.UpdatePersonInputDto;
 import com.bosonit.education.ej2.infrastructure.repository.jpa.PersonRepository;
 import com.bosonit.education.shared.exception.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -68,16 +68,25 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public Person patch(Integer personId, Map<Object, Object> inputDto) throws NotFoundException {
+  public Person patch(Integer personId, UpdatePersonInputDto inputDto) throws NotFoundException, IllegalAccessException {
 
+    // Retrieve entity from database
     Person p = repo.findById(personId).orElseThrow(() -> new NotFoundException("Person", personId));
 
-    inputDto.forEach((k, v) -> {
-      Field field = ReflectionUtils.findField(Person.class, (String) k);
-      field.setAccessible(true);
-      ReflectionUtils.setField(field, p, v);
-    });
+    // Override entity with input values
+    Field[] inputDtoFieldsWithData = inputDto.getClass().getDeclaredFields();
 
+    for (Field f : inputDtoFieldsWithData) {
+
+      f.setAccessible(true);
+      boolean fieldIsOverridable = f.isAnnotationPresent(PatchField.class) && f.getAnnotation(PatchField.class).overrided();
+
+      if (f.get(inputDto) != null || fieldIsOverridable) {
+        ReflectionUtils.setField(f, p, f.get(inputDto));
+      }
+    }
+
+    // Store in database
     return repo.save(p);
   }
 

@@ -62,6 +62,6 @@ public interface PersonService {
    * @return Person The updated registry
    * @throws NotFoundException When an entity of type person is not found in the database
    */
-  Person patch(Integer personId, Map<Object, Object> inputDto) throws NotFoundException;
+  Person patch(Integer personId, UpdatePersonInputDto inputDto) throws NotFoundException, IllegalAccessException;
 
 }
