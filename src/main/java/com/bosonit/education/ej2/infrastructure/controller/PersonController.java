@@ -7,6 +7,7 @@ import com.bosonit.education.ej2.infrastructure.controller.dto.input.UpdatePerso
 import com.bosonit.education.ej2.infrastructure.controller.dto.output.PersonOutputDto;
 import com.bosonit.education.ej2.infrastructure.mapper.PersonMapper;
 import com.bosonit.education.shared.exception.NotFoundException;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@Api(tags = "EJ2")
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "ej4")
