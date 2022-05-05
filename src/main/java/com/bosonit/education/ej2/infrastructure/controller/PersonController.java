@@ -66,7 +66,7 @@ public class PersonController {
   @PatchMapping(value = "{personId}")
   public PersonOutputDto patch(@PathVariable Integer personId, @RequestBody Map<Object, Object> inputDto) throws NotFoundException {
 
-    UpdatePersonInputDto validatedInputDto = PatchInputChecker.check(UpdatePersonInputDto.class, inputDto);
+    // UpdatePersonInputDto validatedInputDto = PatchInputChecker.check(UpdatePersonInputDto.class, inputDto);
 
     Person p = service.patch(personId, inputDto);
 
