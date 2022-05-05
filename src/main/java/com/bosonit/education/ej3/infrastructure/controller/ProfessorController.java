@@ -6,6 +6,7 @@ import com.bosonit.education.ej3.domain.entity.Student;
 import com.bosonit.education.ej3.infrastructure.controller.dto.input.CreateProfessorInputDto;
 import com.bosonit.education.ej3.infrastructure.controller.dto.output.ProfessorOutputDto;
 import com.bosonit.education.ej3.infrastructure.mapper.ProfessorMapper;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,14 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(tags = "EJ3")
 @RestController
-@RequestMapping(name = "ej3")
+@RequestMapping("ej3")
 @AllArgsConstructor
 public class ProfessorController {
 
   private final ProfessorService service;
 
-  @PostMapping(name = "/professors")
+  @PostMapping(value = "/professors")
   public ProfessorOutputDto create(@RequestBody CreateProfessorInputDto inputDto) {
 
     List<Student> students = inputDto.getStudentsIds().isEmpty() ? new ArrayList<>() : inputDto.getStudentsIds().stream().map(Student::new).toList();
