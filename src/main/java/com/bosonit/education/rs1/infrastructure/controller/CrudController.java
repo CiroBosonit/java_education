@@ -1,18 +1,20 @@
 package com.bosonit.education.rs1.infrastructure.controller;
 
 import com.bosonit.education.rs1.application.exception.PersonNotFoundException;
-import com.bosonit.education.rs1.domain.entity.Person;
 import com.bosonit.education.rs1.application.service.CrudService;
+import com.bosonit.education.rs1.domain.entity.Person;
 import com.bosonit.education.rs1.infrastructure.controller.dto.input.AddPersonInputDto;
 import com.bosonit.education.rs1.infrastructure.controller.dto.input.UpdatePersonInputDto;
 import com.bosonit.education.rs1.infrastructure.controller.dto.output.AddPersonOutputDto;
 import com.bosonit.education.rs1.infrastructure.controller.dto.output.PersonOutputDto;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "RS1")
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "rs1")
