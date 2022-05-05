@@ -10,7 +10,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "ej2_person")
+@Table(name = "ej2_person")
 @NoArgsConstructor
 public class Person {
 
